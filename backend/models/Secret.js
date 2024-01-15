@@ -16,5 +16,5 @@ const SecretSchema = new Schema({
 });
 
 
-const Secret = mongoose.model('notes', SecretSchema);
+const Secret = mongoose.model('secrets', SecretSchema);
 module.exports = Secret

@@ -8,7 +8,7 @@ const { body, validationResult } = require('express-validator');
 router.get('/fetchallsecrets', fetchuser, async (req, res) => {
     try {
         const secrets = await Secret.find();
-        res.json(notes)
+        res.json(secrets)
     } catch (error) {
         console.error(error.message);
         res.status(500).send("Internal Server Error");
@@ -21,21 +21,31 @@ router.post('/addsecret', fetchuser, [
     body('description', 'Description must be atleast 5 characters').isLength({ min: 5 }),], async (req, res) => {
         try {
             const { description } = req.body;
+            const userId = req.user.id;
 
+            //check if user has already posted a secret
+            const note = await Secret.findOne({user: userId})
+            if (note){
+                return res.status(403).json({error :"Unauthorized: User is not allowed to add another post"});
+            }
             // If there are errors, return Bad request and the errors
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             }
-            const note = new Note({
-                 description
-            })
-            const savedNote = await note.save()
+            const secret = new Secret({
+                 description,
+                 user: req.user.id
 
-            res.json(savedNote)
+            })
+            const savedSecret = await secret.save()
+
+            res.json(savedSecret)
 
         } catch (error) {
             console.error(error.message);
             res.status(500).send("Internal Server Error");
         }
     })
+
+    module.exports = router
