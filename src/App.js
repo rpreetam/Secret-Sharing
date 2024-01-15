@@ -4,26 +4,21 @@ import Navbar from './components/Navbar';
 import { Home } from './components/Home';
 import SecretState from './context-secrets/SecretState';
 import UserState from "./context-user/UserState";
+import AlertState from "./context-alert/AlertState";
 import { Alert } from './components/Alert';
 import Signup from './components/Signup';
 import Login from './components/Login';
 import { useState } from "react";
 
 function App() {
-  const [alert, setAlert] = useState(null);
-  const showAlert = (message, type)=> {
-    setAlert({msg: message, type: type})
-    setTimeout(()=>{
-      setAlert(null);
-    },1500);
-  }
   return (
     <>
+   <AlertState>
     <UserState>
     <SecretState>
       <Router>
         <Navbar/>
-        <Alert alert={alert}/>
+        <Alert />
         <div className="container">
           <Switch>
             <Route exact  path="/">
@@ -41,6 +36,7 @@ function App() {
       </Router> 
     </SecretState>
     </UserState>
+    </AlertState>
     </>
   );
 }

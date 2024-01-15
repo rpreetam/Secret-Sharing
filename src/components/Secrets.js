@@ -3,7 +3,7 @@ import secretContext from "../context-secrets/secretContext"
 import Secretitem from './Secretitem';
 import AddSecret from './AddSecret';
 
-const Secrets = (props) => {
+const Secrets = () => {
     const context = useContext(secretContext);
     const {secrets , getSecrets} = context;
     useEffect(()=>{getSecrets()
@@ -15,7 +15,7 @@ const Secrets = (props) => {
 
     return (
         <>
-            <AddSecret showAlert= {props.showAlert} />
+            <AddSecret/>
             
             <div className="row my-3">
                 <h2>You secrets</h2>

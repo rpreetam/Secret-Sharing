@@ -1,17 +1,15 @@
 import React, {useContext, useState} from 'react'
 import secretContext from '../context-secrets/secretContext'
 
-const AddSecret = (props) => {
-        const context = useContext(secretContext);
-        const {addSecret} = context;
-    
+const AddSecret = () => {
+        const secContext = useContext(secretContext);  
+        const {addSecret} = secContext;
         const [secret, setSecret] = useState({description: ""})
     
         const handleClick = (e)=>{
             e.preventDefault();
             addSecret( secret.description);
             setSecret({ description: ""})
-            props.showAlert("Added successfully", "success");
         }
     
         const onChange = (e)=>{

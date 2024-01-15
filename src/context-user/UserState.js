@@ -1,7 +1,7 @@
 import UserContext from "./userContext";
 import React, { useState } from "react";
 
-const UserState = (props) => {
+const UserState = ({children}) => {
     const [user,setUser]= useState(null);
     const authToken = localStorage.getItem('token')
     const host = "http://localhost:5000"
@@ -23,7 +23,7 @@ const UserState = (props) => {
     }
     return (
         <UserContext.Provider value={{getUser,user}}>
-            {props.children}
+            {children}
         </UserContext.Provider>
     )
 

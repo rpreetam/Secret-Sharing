@@ -1,4 +1,5 @@
 import SecretContext from "./secretContext";
+import alertContext from "../context-alert/alertContext";
 import { useState } from "react";
 
 const SecretState = (props) => {
@@ -6,6 +7,8 @@ const SecretState = (props) => {
   const secretsInitial = []
   const [secrets, setSecrets] = useState(secretsInitial)
   const authToken = localStorage.getItem('token')
+  const alrtContext = useContext(alertContext)
+  const {showAlert} = alrtContext;
 
    // Get all Secrets
    const getSecrets = async () => {
@@ -35,7 +38,13 @@ const SecretState = (props) => {
     });
 
     const secret = await response.json();
-    setSecrets(secrets.concat(secret));
+    if (secret.error){
+      showAlert("Added successfully", "success");
+    }
+    else{
+      setSecrets(secrets.concat(secret));
+    }
+    
   }
   return (
     <SecretContext.Provider value={{ secrets, addSecret, getSecrets }}>

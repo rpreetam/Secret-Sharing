@@ -3,7 +3,7 @@ import React, {useContext, useEffect} from 'react'
 import { useHistory } from 'react-router-dom';
 import userContext from '../context-user/userContext';
 
-export const Home = (props) => {
+export const Home = () => {
     const history = useHistory();
     const authtoken = localStorage.getItem('token');
     const context = useContext(userContext);
@@ -19,7 +19,7 @@ export const Home = (props) => {
             {
                 authtoken ?
                     <div>
-                        <Secrets showAlert={props.showAlert} />
+                        <Secrets/>
                     </div> : history.push("/login")
             }
         </>
