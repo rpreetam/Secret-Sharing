@@ -8,7 +8,6 @@ import AlertState from "./context-alert/AlertState";
 import { Alert } from './components/Alert';
 import Signup from './components/Signup';
 import Login from './components/Login';
-import { useState } from "react";
 
 function App() {
   return (
@@ -22,13 +21,13 @@ function App() {
         <div className="container">
           <Switch>
             <Route exact  path="/">
-              <Home showAlert={showAlert} />
+              <Home/>
             </Route>
             <Route  path= "/login" >
-              <Login showAlert={showAlert}/>
+              <Login/>
             </Route>
             <Route  path="/signup">
-              <Signup showAlert={showAlert} />
+              <Signup  />
             </Route>
           </Switch>
 

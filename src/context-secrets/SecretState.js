@@ -1,6 +1,6 @@
 import SecretContext from "./secretContext";
 import alertContext from "../context-alert/alertContext";
-import { useState } from "react";
+import { useState, useContext } from "react";
 
 const SecretState = (props) => {
   const host = "http://localhost:5000"
@@ -39,9 +39,10 @@ const SecretState = (props) => {
 
     const secret = await response.json();
     if (secret.error){
-      showAlert("Added successfully", "success");
+      showAlert("You have already posted your one secret", "danger");
     }
     else{
+      showAlert("Added successfully", "success");
       setSecrets(secrets.concat(secret));
     }
     

@@ -3,7 +3,7 @@ import alertContext from "../context-alert/alertContext";
 
 
 export const Alert  = (props) =>{
-    const context = useContext(alertContextContext);
+    const context = useContext(alertContext);
     const { alert } = context;
     const capitalize = (word)=>{
         if (word=== 'danger'){

@@ -1,8 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import { useHistory } from 'react-router-dom';
+import alertContext from '../context-alert/alertContext';
 
-const Login = (props) => {
+const Login = () => {
     const [credentials, setCredentials]= useState({email: '', password:''});
+    const context = useContext(alertContext);
+    const {showAlert} = context;
     let history = useHistory();
 
     const handleSubmit = async (e) => {
@@ -20,10 +23,10 @@ const Login = (props) => {
             // save the auth token and redirect
             localStorage.setItem('token', json.authtoken);
              history.push("/")
-            props.showAlert("Loggedin Successfully", "success")
+            showAlert("Loggedin Successfully", "success")
         }
         else{
-            props.showAlert("Invalid credentials", "danger");
+            showAlert("Invalid credentials", "danger");
         }
     }
 
