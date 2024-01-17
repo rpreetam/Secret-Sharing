@@ -35,8 +35,8 @@ const Navbar = () => {
                     </ul>
 
                     {!token ? (<form className='d-flex'>
-                        <Link className='btn btn-primary mx-1' to='/login' role='button'>Login</Link>
-                        <Link className='btn btn-primary mx-1' to='/signup' role='button'>signup</Link>
+                      { location.pathname !== "/login" ? <Link className='btn btn-primary mx-1' to='/login' role='button'>Login</Link>
+                       : <Link className='btn btn-primary mx-1' to='/signup' role='button'>signup</Link> }
                     </form>) : <><h5 style={{ color: "white", marginRight: "5px" }}>Welcome : {user && user.name}</h5> <button onClick={handleLogout} className='btn btn-primary'>Logout</button></>}
                 </div>
 

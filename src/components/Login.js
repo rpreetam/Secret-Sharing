@@ -1,12 +1,39 @@
 import React, {useState, useContext} from 'react'
 import { useHistory } from 'react-router-dom';
 import alertContext from '../context-alert/alertContext';
+import { GoogleLogin } from 'react-google-login';
+import axios from 'axios';
+// import { jwtDecode } from 'jwt-decode';
 
 const Login = () => {
     const [credentials, setCredentials]= useState({email: '', password:''});
     const context = useContext(alertContext);
     const {showAlert} = context;
     let history = useHistory();
+     // This function will be called upon a successful login
+  
+
+     const responseGoogle = async (response) => {
+      try {
+        // Extract relevant information from the Google OAuth 
+        console.log('res', response);
+        const { profileObj } = response;
+        console.log("prf obj",profileObj)
+        const { email, name, googleId } = profileObj;
+  
+        // Send the user information to the backend using Axios
+        const backendResponse = await axios.post('/api/login', {
+          email,
+          username: name,
+          oauthId: googleId,
+        });
+  
+        // Handle the backend response as needed
+        console.log('Backend Response:', backendResponse.data);
+      } catch (error) {
+        console.error('Error:', error.message);
+      }
+    };
 
     const handleSubmit = async (e) => {
         
@@ -50,6 +77,13 @@ const Login = () => {
 
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
+            <div> <GoogleLogin
+        clientId="1004074720628-kpffpjl3jt5msckvftv4cv4cju4s2rlf.apps.googleusercontent.com"
+        buttonText="Login with Google"
+        onSuccess={responseGoogle}
+        onFailure={responseGoogle}
+        cookiePolicy={'single_host_origin'}
+      /></div>
         </div>
     )
 }
