@@ -6,6 +6,7 @@ import userContext from '../context-user/userContext';
 export const Home = () => {
     const history = useHistory();
     const authtoken = localStorage.getItem('token');
+    const gUser = localStorage.getItem('user');
     const context = useContext(userContext);
     const { getUser} = context;
 
@@ -17,7 +18,7 @@ export const Home = () => {
 
         <>
             {
-                authtoken ?
+                authtoken || gUser ?
                     <div>
                         <Secrets/>
                     </div> : history.push("/login")

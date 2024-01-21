@@ -5,12 +5,16 @@ const Secret = require('../models/Secret');
 const { body, validationResult } = require('express-validator');
 
 // ROUTE 1: Get All the secrets using: GET "/api/secrets/fetchallsecrets". Login required
-router.get('/fetchallsecrets', fetchuser, async (req, res) => {
+router.post('/fetchallsecrets', fetchuser, async (req, res) => {
     try {
+        console.log("under try")
         const secrets = await Secret.find();
+        console.log("secrets", secrets)
         res.json(secrets)
     } catch (error) {
+        console.log("error inside catch:", error)
         console.error(error.message);
+
         res.status(500).send("Internal Server Error");
     }
 })

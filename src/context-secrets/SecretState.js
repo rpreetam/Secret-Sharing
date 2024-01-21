@@ -7,6 +7,7 @@ const SecretState = (props) => {
   const secretsInitial = []
   const [secrets, setSecrets] = useState(secretsInitial)
   const authToken = localStorage.getItem('token')
+  const gUser = JSON.parse(localStorage.getItem('user'));
   const alrtContext = useContext(alertContext)
   const {showAlert} = alrtContext;
 
@@ -14,11 +15,12 @@ const SecretState = (props) => {
    const getSecrets = async () => {
     // API Call 
     const response = await fetch(`${host}/api/secrets/fetchallsecrets`, {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         "auth-token": authToken
-      }
+      },
+      body: JSON.stringify({user: {id: gUser.userId}})
     });
     const json = await response.json() 
     setSecrets(json)
@@ -34,7 +36,7 @@ const SecretState = (props) => {
         'Content-Type': 'application/json',
         "auth-token": authToken
       },
-      body: JSON.stringify({description})
+      body: JSON.stringify({description, user: {id: gUser.userId}})
     });
 
     const secret = await response.json();
