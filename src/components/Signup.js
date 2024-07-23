@@ -7,12 +7,13 @@ const Signup = (props) => {
     const [credentials, setCredentials]= useState({name: '', email: '', password:'', cpassword:''});
     const context = useContext(alertContext);
     const {showAlert} = context;
+    const host = process.env.HOST;
     let history = useHistory();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const {name, email, password}= credentials;
-        const response = await fetch("https://secret-sharing-backend.vercel.app/api/auth/createuser",{
+        const response = await fetch(`${host}/api/auth/createuser`,{
             method: "post",
             headers: {
                 'Content-Type': 'application/json'

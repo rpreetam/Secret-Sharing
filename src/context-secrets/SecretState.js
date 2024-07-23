@@ -3,7 +3,7 @@ import alertContext from "../context-alert/alertContext";
 import { useState, useContext } from "react";
 
 const SecretState = (props) => {
-  const host = "https://secret-sharing-backend.vercel.app"
+  const host = process.env.HOST;
   const secretsInitial = []
   const [secrets, setSecrets] = useState(secretsInitial)
   const authToken = localStorage.getItem('token')

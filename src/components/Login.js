@@ -9,6 +9,7 @@ const Login = () => {
     const [credentials, setCredentials]= useState({email: '', password:''});
     const context = useContext(alertContext);
     const {showAlert} = context;
+    const host = process.env.HOST;
     let history = useHistory();
 
   
@@ -16,7 +17,7 @@ const Login = () => {
 const handleSuccess = (credentialResponse) => {
 
   const responsePayload = jwtDecode(credentialResponse.credential);
-  console.log("response", responsePayload)
+  console.log("response", responsePayload)  
 
   localStorage.setItem('user', JSON.stringify( {name : responsePayload.name, email: responsePayload.email, userId: responsePayload.sub}));
   history.push("/")
@@ -32,7 +33,7 @@ const handleError = (errorResponse) => {
     const handleSubmit = async (e) => {
         
         e.preventDefault();
-        const response = await fetch("https://secret-sharing-backend.vercel.app/api/auth/login",{
+        const response = await fetch(`${host}/api/auth/login`,{
             method: "post",
             headers: {
                 'Content-Type': 'application/json'
