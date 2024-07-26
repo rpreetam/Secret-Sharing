@@ -7,7 +7,7 @@ const Signup = (props) => {
     const [credentials, setCredentials]= useState({name: '', email: '', password:'', cpassword:''});
     const context = useContext(alertContext);
     const {showAlert} = context;
-    const host = process.env.HOST;
+    const host = process.env.REACT_APP_HOST;
     let history = useHistory();
 
     const handleSubmit = async (e) => {

@@ -1,5 +1,5 @@
 import Secrets from './Secrets'
-import React, {useContext, useEffect} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 import { useHistory } from 'react-router-dom';
 import userContext from '../context-user/userContext';
 
@@ -9,11 +9,17 @@ export const Home = () => {
     const gUser = localStorage.getItem('user');
     const context = useContext(userContext);
     const { getUser} = context;
+    const [userFetched, setUserFetched] = useState(false);
 
-    useEffect(()=> {
-        getUser();
+    useEffect(() => {
+        if (!authtoken && !gUser) {
+            history.push("/login");
+        } else if (!userFetched) {
+            getUser();
+            setUserFetched(true);
+        }
         // eslint-disable-next-line
-    },[]);
+    }, [authtoken, gUser, history, userFetched]);
     return (
 
         <>
@@ -21,7 +27,7 @@ export const Home = () => {
                 authtoken || gUser ?
                     <div>
                         <Secrets/>
-                    </div> : history.push("/login")
+                    </div> : null
             }
         </>
     )

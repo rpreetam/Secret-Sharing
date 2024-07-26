@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const UserState = ({children}) => {
     const [user,setUser]= useState(null);
     const authToken = localStorage.getItem('token')
-    const host = process.env.HOST;
+    const host = process.env.REACT_APP_HOST;
 
     
 

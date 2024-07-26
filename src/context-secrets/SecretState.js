@@ -3,7 +3,7 @@ import alertContext from "../context-alert/alertContext";
 import { useState, useContext } from "react";
 
 const SecretState = (props) => {
-  const host = process.env.HOST;
+  const host = process.env.REACT_APP_HOST;
   const secretsInitial = []
   const [secrets, setSecrets] = useState(secretsInitial)
   const authToken = localStorage.getItem('token')
@@ -20,7 +20,7 @@ const SecretState = (props) => {
         'Content-Type': 'application/json',
         "auth-token": authToken
       },
-      body: JSON.stringify({user: {id: gUser.userId}})
+      body:gUser&& JSON.stringify({user: {id: gUser.userId}})
     });
     const json = await response.json() 
     setSecrets(json)
@@ -36,7 +36,7 @@ const SecretState = (props) => {
         'Content-Type': 'application/json',
         "auth-token": authToken
       },
-      body: JSON.stringify({description, user: {id: gUser.userId}})
+      body: JSON.stringify({description, user:gUser&& {id: gUser.userId}})
     });
 
     const secret = await response.json();
