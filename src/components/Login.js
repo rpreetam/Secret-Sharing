@@ -9,7 +9,7 @@ const Login = () => {
     const [credentials, setCredentials]= useState({email: '', password:''});
     const context = useContext(alertContext);
     const {showAlert} = context;
-    const host = process.env.HOST;
+    const host = process.env.REACT_APP_HOST;
     let history = useHistory();
 
   

@@ -22,8 +22,8 @@ const Secrets = () => {
                 <div className="container mx-2 my-2"> 
                 {secrets.length===0 && 'No secrets to display'}
                 </div>
-                {secrets.map((secret) => {
-                    return <Secretitem key={secret._id}  secret={secret} />
+                {secrets.map((secret,index) => {
+                    return <Secretitem key={secret._id} index={index}  secret={secret} />
                 })}
             </div>
         </>
