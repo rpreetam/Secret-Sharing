@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Navbar from './components/Navbar';
 import { Home } from './components/Home';
+import About from './components/About'
 import SecretState from './context-secrets/SecretState';
 import UserState from "./context-user/UserState";
 import AlertState from "./context-alert/AlertState";
@@ -25,6 +26,9 @@ function App() {
                   <Switch>
                     <Route exact path="/">
                       <Home />
+                    </Route>
+                    <Route path="/about">
+                      <About/>
                     </Route>
                     <Route path="/login" >
                       <Login />
