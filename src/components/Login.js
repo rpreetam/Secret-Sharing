@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import alertContext from '../context-alert/alertContext';
 import { GoogleLogin } from '@react-oauth/google';
 //import axios from 'axios';
@@ -57,7 +57,7 @@ const handleError = (errorResponse) => {
     }
 
     return (
-        <div>
+        <div className='container mt-5' style={{maxWidth : '400px'}}>
             <h2>Login to countinue to Inotebook</h2>
             <form  onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -70,12 +70,21 @@ const handleError = (errorResponse) => {
                     <input type="password" className="form-control" value={credentials.password} onChange={onChange} name="password" id="password" />
                 </div>
 
-                <button type="submit" className="btn btn-primary">Submit</button>
-            </form>
+                <button type="submit" className="btn btn-primary w-100">Submit</button>
+           
+            <div className="text-center my-3">or</div>
+
             <div>  <GoogleLogin
       onSuccess={handleSuccess}
       onError={handleError}
+      width= {350}
+      size='large'
+      
     /></div>
+    <div class="mt-3 text-center">
+      <Link to="/signup">Don't have an account? Register here</Link>
+    </div>
+    </form>
         </div>
     )
 }
