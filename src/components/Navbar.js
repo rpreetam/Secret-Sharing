@@ -9,6 +9,7 @@ const Navbar = () => {
     const { user } = context;
     const token = localStorage.getItem('token');
     const gUser = JSON.parse(localStorage.getItem('user'));
+    console.log('gUser',gUser)
 
     const handleLogout = () => {
         localStorage.removeItem('token');
@@ -55,7 +56,7 @@ const Navbar = () => {
                     ) : (
                         <>
                             <h5 style={{ color: "white", marginRight: "20px", fontFamily: "cursive"}}>
-                                Welcome: {user ? user.name : (gUser && gUser.name)}
+                                Welcome: {user?.name || gUser?.name}
                             </h5>
                             <button onClick={handleLogout} className='btn btn-primary'>Logout</button>
                         </>

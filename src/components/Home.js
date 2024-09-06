@@ -14,7 +14,7 @@ export const Home = () => {
     useEffect(() => {
         if (!authtoken && !gUser) {
             history.push("/login");
-        } else if (!userFetched) {
+        } else if (!userFetched && !gUser) {
             getUser();
             setUserFetched(true);
         }
